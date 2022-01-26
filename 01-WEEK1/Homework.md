@@ -113,7 +113,7 @@ GROUP BY
 ORDER BY "tip" DESC;
 ```
 ```
-2021-01-20
+2021-01-20:1140
 ```
 
 
@@ -125,6 +125,33 @@ in central park on January 14?
 Use the pick up time for your calculations.
 
 Enter the zone name (not id). If the zone name is unknown (missing), write "Unknown" 
+
+```
+SELECT
+    CONCAT(zpu."Borough", '/', zpu."Zone") AS "pickup_loc",
+    CONCAT(zdo."Borough", '/', zdo."Zone") AS "dropoff_loc",
+    COUNT(1) AS "trips"
+FROM
+    yellow_taxi_data t JOIN zones zpu
+        ON t."PULocationID" = zpu."LocationID"
+    JOIN zones zdo
+        ON t."DOLocationID" = zdo."LocationID"
+WHERE
+	t."PULocationID" = (
+		SELECT
+			"LocationID"
+		FROM
+			zones zpu
+		WHERE
+			zpu."Zone" IN ('Central Park')
+  )
+GROUP BY
+	1, 2 
+ORDER BY "trips" DESC;
+```
+```
+Manhattan/Upper East Side North:2234
+```
 
 
 ## Question 6. Most expensive locations
