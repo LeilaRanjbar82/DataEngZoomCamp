@@ -181,7 +181,7 @@ GROUP BY
 ORDER BY "amount_average" DESC;
 ```
 ```
-Alphabet city/Unknown
+Alphabet city/       :2292
 ```
 
 
