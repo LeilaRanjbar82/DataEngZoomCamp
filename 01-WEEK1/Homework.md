@@ -80,7 +80,19 @@ Download this data and put it to Postgres
 How many taxi trips were there on January 15?
 
 Consider only trips that started on January 15.
-
+```
+SELECT
+    CAST(tpep_pickup_datetime AS DATE) as "day",
+    COUNT(1)
+FROM
+    yellow_taxi_data t
+GROUP BY
+    CAST(tpep_pickup_datetime AS DATE)
+ORDER BY "day" ASC;	
+```
+```
+53024
+```
 
 ## Question 4. Largest tip for each day
 
