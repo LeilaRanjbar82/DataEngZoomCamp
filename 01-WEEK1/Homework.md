@@ -82,13 +82,12 @@ How many taxi trips were there on January 15?
 Consider only trips that started on January 15.
 ```
 SELECT
-    CAST(tpep_pickup_datetime AS DATE) as "day",
-    COUNT(1)
+	count("tpep_pickup_datetime")
 FROM
-    yellow_taxi_data t
-GROUP BY
-    CAST(tpep_pickup_datetime AS DATE)
-ORDER BY "day" ASC;	
+	yellow_taxi_data t
+WHERE
+	(tpep_pickup_datetime>='2021-01-15 00:00:00' AND
+  	tpep_pickup_datetime<'2021-01-16 00:00:00');	
 ```
 ```
 53024
@@ -102,6 +101,20 @@ On which day it was the largest tip in January?
 Use the pick up time for your calculations.
 
 (note: it's not a typo, it's "tip", not "trip")
+
+```
+SELECT
+	CAST(tpep_pickup_datetime AS DATE) as "day",
+	MAX(tip_amount) as "tip"
+FROM
+	yellow_taxi_data t
+GROUP BY
+	1
+ORDER BY "tip" DESC;
+```
+```
+2021-01-20
+```
 
 
 ## Question 5. Most popular destination
