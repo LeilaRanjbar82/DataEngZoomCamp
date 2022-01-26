@@ -167,5 +167,22 @@ For example:
 
 If any of the zone names are unknown (missing), write "Unknown". For example, "Unknown / Clinton East". 
 
+```
+SELECT
+    CONCAT(zpu."Zone", '/', zdo."Zone") AS "zone_pair",
+    AVG(t."total_amount") AS "amount_average"
+FROM
+    yellow_taxi_data t JOIN zones zpu
+        ON t."PULocationID" = zpu."LocationID"
+    JOIN zones zdo
+        ON t."DOLocationID" = zdo."LocationID"
+GROUP BY
+	1
+ORDER BY "amount_average" DESC;
+```
+```
+Alphabet city/Unknown
+```
+
 
 
